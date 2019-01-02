@@ -1,19 +1,39 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
+import Search from "./components/pages/search";
+import Saved from "./components/pages/saved";
+import { Navbar } from "./components/Navbar";
+import { BrowserRouter as Router } from "react-router-dom";
 
 class App extends Component {
+  state = {
+    currentPage: "Search"
+  };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
+  renderPage = () => {
+    if (this.state.currentPage === "Saved") {
+      return <Saved />;
+    } else {
+      return <Search />;
+    }
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div>
+          <Navbar 
+          currentPage={this.state.currentPage}
+          handlePageChange={this.handlePageChange}
+          />
+          {this.renderPage()}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }
