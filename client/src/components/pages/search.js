@@ -30,7 +30,23 @@ class Search extends Component {
 
   searchBooks = query => {
     API.search(query)
-      .then(res => this.setState({ results: res.data.items }))
+      // .then(res => this.setState({ results: res.data.items }))
+      .then(function(res) {
+        const results = [];
+        res.data.items.forEach(book => {
+          results.push(
+            {
+              title: book.volumeInfo.title,
+              link: book.volumeInfo.infoLink,
+              authors: book.volumeInfo.authors.join(", "),
+              image: book.volumeInfo.imageLinks.thumbnail,
+              description: book.volumeInfo.description
+            }
+          )
+        });
+        console.log(results);
+        return results;
+      })
       .catch(err => console.log(err));
   };
 
@@ -48,6 +64,7 @@ class Search extends Component {
               handleFormSubmit={this.handleFormSubmit}
               handleInputChange={this.handleInputChange}
             />
+            <h2>Results</h2>
             <ResultList results={this.state.results} />
           </div>
         </div>

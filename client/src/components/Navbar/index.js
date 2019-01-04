@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 export function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <Link to="/" className="navbar-brand">
+      <Link to="/search" className="navbar-brand">
         Google Books
       </Link>
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link to="/search"
+          <Link to="/"
           onClick={() => props.handlePageChange("Search")}
           className={props.currentPage === "Search" ? "nav-link active" : "nav-link"}
           >
