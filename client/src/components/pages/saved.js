@@ -1,7 +1,9 @@
 import React from "react";
+import Header from "../Header";
 
 const Saved = () => (
   <div>
+    <Header />
     <h1>Saved Page</h1>
     <p>
       Nunc pharetra finibus est at efficitur. Praesent sed congue diam. Integer gravida dui mauris,

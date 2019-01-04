@@ -1,0 +1,29 @@
+.result__header {
+  display: flex;
+}
+
+.result__title {
+  /* float: left; */
+  flex: 0 1 auto;
+}
+
+.result__byline {
+  clear: both;
+}
+
+.result__buttons {
+  text-align: right;
+  flex: 1 0 auto;
+}
+
+.result__buttons .btn {
+  margin: 0 5px;
+  color: #fff;
+}
+
+.results__img {
+  max-width: 45%;
+  height: auto;
+  float: left;
+  margin: 0 20px 20px 0;
+}

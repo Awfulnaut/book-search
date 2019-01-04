@@ -7,8 +7,8 @@ export function Navbar(props) {
       <Link to="/" className="navbar-brand">
         Google Books
       </Link>
-      <ul class="navbar-nav">
-        <li class="nav-item">
+      <ul className="navbar-nav">
+        <li className="nav-item">
           <Link to="/search"
           onClick={() => props.handlePageChange("Search")}
           className={props.currentPage === "Search" ? "nav-link active" : "nav-link"}
@@ -16,7 +16,7 @@ export function Navbar(props) {
             Search
           </Link>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <Link to="/saved"
           onClick={() => props.handlePageChange("Saved")}
           className={props.currentPage === "Saved" ? "nav-link active" : "nav-link"}

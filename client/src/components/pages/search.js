@@ -1,19 +1,59 @@
-import React from "react";
+import React, { Component } from "react";
+import Header from "../Header";
+import SearchForm from "../SearchForm";
+import ResultList from "../ResultList";
+import API from "../utils/API";
 
-const Search = () => (
-  <div>
-    <h1>Search Page</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque velit, lobortis ut magna
-      varius, blandit rhoncus sem. Morbi lacinia nisi ac dui fermentum, sed luctus urna tincidunt.
-      Etiam ut feugiat ex. Cras non risus mi. Curabitur mattis rutrum ipsum, ut aliquet urna
-      imperdiet ac. Sed nec nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum ligula
-      in tincidunt commodo. Morbi sit amet mollis orci, in tristique ex. Donec nec ornare elit.
-      Donec blandit est sed risus feugiat porttitor. Vestibulum molestie hendrerit massa non
-      consequat. Vestibulum vitae lorem tortor. In elementum ultricies tempus. Interdum et malesuada
-      fames ac ante ipsum primis in faucibus.
-    </p>
-  </div>
-);
+class Search extends Component {
+  state = {
+    search: "",
+    results: []
+  }
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  // When the form is submitted, search the Google Books API for `this.state.search`
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.searchBooks(this.state.search);
+  };
+
+  componentDidMount() {
+    this.searchBooks("Harry Potter");
+  }
+
+  searchBooks = query => {
+    API.search(query)
+      .then(res => this.setState({ results: res.data.items }))
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    return (
+      <div>
+
+        <Header />
+
+        <div className="container">
+          <div className="col-12">
+            <h2>Book Search</h2>
+            <SearchForm 
+              search={this.state.search}
+              handleFormSubmit={this.handleFormSubmit}
+              handleInputChange={this.handleInputChange}
+            />
+            <ResultList results={this.state.results} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+};
 
 export default Search;
