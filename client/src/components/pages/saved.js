@@ -19,6 +19,10 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
+  handleDelete = id => {
+    console.log(id)
+  }
+
   render() {
     return (
       <div>
@@ -28,7 +32,7 @@ class Saved extends Component {
             <h2>Saved Books</h2>
             <ResultList
               books={this.state.books}
-              currentPage="saved"
+              handleDelete={this.handleDelete}
             />
           </div>
         </div>

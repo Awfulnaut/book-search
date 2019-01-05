@@ -13,7 +13,7 @@ function ResultList(props) {
               <a target="_blank" href={book.link} className="btn btn-primary view">View</a>
               {props.currentPage === "search" ? 
                 <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
-                <button onClick={() => props.handleBookSave(book.id)} className="btn btn-danger save">Remove</button>
+                <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
               }
                 
             </div>

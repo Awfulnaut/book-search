@@ -19,14 +19,14 @@ class Search extends Component {
   };
 
   handleBookSave = id => {
-    const result = this.state.books.find(result => result.id === id);
+    const result = this.state.books.find(book => book.id === id);
     API.saveBook({
       id: result.id,
-      title: result.volumeInfo.title,
-      link: result.volumeInfo.infoLink,
-      authors: result.volumeInfo.authors.join(", "),
-      image: result.volumeInfo.imageLinks.thumbnail,
-      description: result.volumeInfo.description
+      title: result.title,
+      link: result.link,
+      authors: result.authors,
+      image: result.image,
+      description: result.description
     })
   };
 
@@ -43,26 +43,6 @@ class Search extends Component {
     const results = [];
     API.search(query)
       .then(function(res) {
-
-        // for (let i = 0; i < res.data.items.length; i++) {
-        //   var authors;
-        //   if (res.data.items[i].authors.length >= 1) {
-        //     authors = res.data.items[i].authors.join(", ")
-        //   } else {
-        //     authors = res.data.items[i].authors
-        //   }
-        //   results.push(
-        //     {
-        //       id: res.data.items[i].id,
-        //       title: res.data.items[i].volumeInfo.title,
-        //       link: res.data.items[i].volumeInfo.infoLink,
-        //       authors: res.data.items[i].volumeInfo.authors.join(", "),
-        //       image: res.data.items[i].volumeInfo.imageLinks.thumbnail,
-        //       description: res.data.items[i].volumeInfo.description
-        //     }
-        //   )
-        // }
-
         res.data.items.forEach(book => {
           results.push(
             {
