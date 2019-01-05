@@ -34,6 +34,11 @@ class Search extends Component {
     this.searchBooks("Harry Potter");
   }
 
+  handleSearch = event => {
+    event.preventDefault();
+    this.searchBooks(this.state.search)
+  }
+
   searchBooks = query => {
     const results = [];
     API.search(query)
@@ -50,6 +55,8 @@ class Search extends Component {
             }
           )
         });
+        console.log(`Query: ${query}`)
+        console.log(results)
       })
       .then(() => this.setState({ books: results }))
       .catch(err => console.log(err));
@@ -67,6 +74,7 @@ class Search extends Component {
             <SearchForm 
               search={this.state.search}
               handleInputChange={this.handleInputChange}
+              handleSearch={this.handleSearch}
             />
             <h2>Results</h2>
             <ResultList
