@@ -1,29 +1,24 @@
-# Create React Express App
+# Book Search
 
-## About This Boilerplate
-
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
-
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+This full-stack MERN app allows the user to query the google books api to find books and save them to their list. 
 
 ## Starting the app locally
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+  * Clone the project down with `git clone https://github.com/Awfulnaut/book-search.git`.
 
-```
-yarn install
-```
+  * Run `npm install`, which will install all dependencies for both the server and the front end
 
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-yarn start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+  * Run `yarn start` and the app will open at <localhost:3000>. The Express server should intercept any AJAX requests from the client.
 
 ## Deployment (Heroku)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+To deploy, perform the following:
+
+  * Log into heroku with `heroku login` and then run `heroku create` to generate a new heroku instance.
+
+  * Add a MongoLab Addon by running `heroku addons:create mongolab`
+
+  * `git add` and `git commit` any changes and push up to heroku with `git push heroku master`. The NPM scripts should take care of the rest.
+
+---
+For more information, email [cadin.mcqueen@gmail.com](mailto:cadin.mcqueen@gmail.com).
