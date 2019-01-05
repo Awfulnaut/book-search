@@ -7,7 +7,7 @@ import API from "../utils/API";
 class Search extends Component {
   state = {
     search: "",
-    results: []
+    books: []
   }
 
   handleInputChange = event => {
@@ -18,10 +18,16 @@ class Search extends Component {
     });
   };
 
-  // When the form is submitted, search the Google Books API for `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchBooks(this.state.search);
+  handleBookSave = id => {
+    const result = this.state.books.find(result => result.id === id);
+    API.saveBook({
+      id: result.id,
+      title: result.volumeInfo.title,
+      link: result.volumeInfo.infoLink,
+      authors: result.volumeInfo.authors.join(", "),
+      image: result.volumeInfo.imageLinks.thumbnail,
+      description: result.volumeInfo.description
+    })
   };
 
   componentDidMount() {
@@ -29,13 +35,13 @@ class Search extends Component {
   }
 
   searchBooks = query => {
+    const results = [];
     API.search(query)
-      // .then(res => this.setState({ results: res.data.items }))
       .then(function(res) {
-        const results = [];
         res.data.items.forEach(book => {
           results.push(
             {
+              id: book.id,
               title: book.volumeInfo.title,
               link: book.volumeInfo.infoLink,
               authors: book.volumeInfo.authors.join(", "),
@@ -44,9 +50,8 @@ class Search extends Component {
             }
           )
         });
-        console.log(results);
-        return results;
       })
+      .then(() => this.setState({ books: results }))
       .catch(err => console.log(err));
   };
 
@@ -61,11 +66,14 @@ class Search extends Component {
             <h2>Book Search</h2>
             <SearchForm 
               search={this.state.search}
-              handleFormSubmit={this.handleFormSubmit}
               handleInputChange={this.handleInputChange}
             />
             <h2>Results</h2>
-            <ResultList results={this.state.results} />
+            <ResultList
+              books={this.state.books}
+              handleBookSave={this.handleBookSave}
+              currentPage="search"
+            />
           </div>
         </div>
       </div>
