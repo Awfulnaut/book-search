@@ -43,20 +43,38 @@ class Search extends Component {
     const results = [];
     API.search(query)
       .then(function(res) {
+
+        // for (let i = 0; i < res.data.items.length; i++) {
+        //   var authors;
+        //   if (res.data.items[i].authors.length >= 1) {
+        //     authors = res.data.items[i].authors.join(", ")
+        //   } else {
+        //     authors = res.data.items[i].authors
+        //   }
+        //   results.push(
+        //     {
+        //       id: res.data.items[i].id,
+        //       title: res.data.items[i].volumeInfo.title,
+        //       link: res.data.items[i].volumeInfo.infoLink,
+        //       authors: res.data.items[i].volumeInfo.authors.join(", "),
+        //       image: res.data.items[i].volumeInfo.imageLinks.thumbnail,
+        //       description: res.data.items[i].volumeInfo.description
+        //     }
+        //   )
+        // }
+
         res.data.items.forEach(book => {
           results.push(
             {
               id: book.id,
-              title: book.volumeInfo.title,
-              link: book.volumeInfo.infoLink,
-              authors: book.volumeInfo.authors.join(", "),
-              image: book.volumeInfo.imageLinks.thumbnail,
-              description: book.volumeInfo.description
+              title: book.volumeInfo.title ? book.volumeInfo.title : "No title available",
+              link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+              authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
+              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "",
+              description: book.volumeInfo.description ? book.volumeInfo.description : "No description available"
             }
           )
         });
-        console.log(`Query: ${query}`)
-        console.log(results)
       })
       .then(() => this.setState({ books: results }))
       .catch(err => console.log(err));
