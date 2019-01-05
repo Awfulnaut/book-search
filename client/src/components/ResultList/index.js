@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-// import API from "../utils/API";
 
 function ResultList(props) {
   return (
@@ -10,7 +9,7 @@ function ResultList(props) {
           <div className="result__header">
             <h3 className="result__title">{book.title}</h3>
             <div className="result__buttons">
-              <a target="_blank" href={book.link} className="btn btn-primary view">View</a>
+              <a href={book.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary view">View</a>
               {props.currentPage === "search" ? 
                 <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
                 <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
@@ -19,13 +18,13 @@ function ResultList(props) {
             </div>
           </div>
           <p className="result__byline">
-            Written by {book.authors}
+            Author(s): <strong>{book.authors}</strong>
           </p>
           <img
             alt={book.title} className="results__img"
-            src={book.image ? book.image : 'http://placehold.it/128x195'} />
+            src={book.image} />
           <p className="results__description">
-            {book.description ? book.description : "No description available"}
+            {book.description}
           </p>
           <div className="clearfix"></div>
         </div>

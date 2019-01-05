@@ -1,10 +1,9 @@
 import React from "react";
 
-const Header = () => (
-    <div className="jumbotron jumbotron-fluid text-center">
+const Header = (props) => (
+    <div className="jumbotron jumbotron-fluid text-center py-4">
       <div className="container">
-        <h1 className="display-4">(React) Google Books Search</h1>
-        <p className="lead">Search for and save books of interest</p>
+        <h1 className="display-4">{props.title}</h1>
       </div>
     </div>
 );

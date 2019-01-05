@@ -28,10 +28,9 @@ class Saved extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header title="Your Saved Books"/>
         <div className="container">
-          <div className="col-12">
-            <h2>Saved Books</h2>
+          <div className="col-12 mb-4">
             <ResultList
               books={this.state.books}
               handleDelete={this.handleDelete}

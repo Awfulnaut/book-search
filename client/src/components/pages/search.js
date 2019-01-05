@@ -27,6 +27,8 @@ class Search extends Component {
       authors: result.authors,
       image: result.image,
       description: result.description
+    }).then(() => {
+      alert(`A book added to your saved list:\n${result.title}`)
     })
   };
 
@@ -47,11 +49,11 @@ class Search extends Component {
           results.push(
             {
               id: book.id,
-              title: book.volumeInfo.title ? book.volumeInfo.title : "No title available",
+              title: book.volumeInfo.title ? book.volumeInfo.title : "Title not found",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
-              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "",
-              description: book.volumeInfo.description ? book.volumeInfo.description : "No description available"
+              authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
+              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
+              description: book.volumeInfo.description ? book.volumeInfo.description : "Description not found"
             }
           )
         });
@@ -64,11 +66,10 @@ class Search extends Component {
     return (
       <div>
 
-        <Header />
+        <Header title="Google Books Search"/>
 
         <div className="container">
           <div className="col-12">
-            <h2>Book Search</h2>
             <SearchForm 
               search={this.state.search}
               handleInputChange={this.handleInputChange}
