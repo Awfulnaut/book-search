@@ -23,15 +23,19 @@ module.exports = {
   },
   update: function(req, res) {
     db.Book
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
+    // console.log(req)
     db.Book
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .findOneAndRemove({ id: req.params.id })
+      // .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.log(err);
+        res.status(422).json(err)
+      });
   }
 };

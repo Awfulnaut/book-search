@@ -15,12 +15,14 @@ class Saved extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res => this.setState({ books: res.data }))
-      .then(() => {console.log(this.state.books)})
+      // .then(() => {console.log(this.state.books)})
       .catch(err => console.log(err));
   };
 
   handleDelete = id => {
-    console.log(id)
+    API.deleteBook(id)
+      .then(this.loadBooks())
+      .catch(err => console.log(err));
   }
 
   render() {
